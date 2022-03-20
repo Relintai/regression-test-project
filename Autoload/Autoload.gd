@@ -48,9 +48,9 @@ func _process(delta: float) -> void:
 
 	if current_run_time > time_to_show && can_be_closed:
 		print("######################## Ending test ########################")
+		get_tree().quit()
 		#hack to make sure the engine always quits no matter what, because doing this will throw an exception
-		get_tree().quit()
-		get_tree().quit()
-		get_tree().quit()
+		#get_tree().quit()
+		#get_tree().quit()
 
 
