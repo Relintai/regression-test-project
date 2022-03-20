@@ -24,18 +24,7 @@ const alone_steps: Array = [
 	"res://AutomaticBugs/FunctionExecutor.tscn",  # Only need to run once
 ]
 
-var time_object: Object
-
-
 func _init():
-	# Workaround for Time/OS breaking change - https://github.com/godotengine/godot/pull/54056
-	if ClassDB.class_exists("_Time"):
-		time_object = ClassDB.instance("_Time")
-	elif ClassDB.class_exists("Time"):
-		time_object = Time#ClassDB.instance("Time")
-	else:
-		time_object = ClassDB.instance("_OS")
-
 	start_time = Time.get_ticks_msec()
 
 	# In case when user doesn't provide time
@@ -50,7 +39,7 @@ func _init():
 
 
 func _process(delta: float) -> void:
-	var current_run_time: int = time_object.get_ticks_msec() - start_time
+	var current_run_time: int = Time.get_ticks_msec() - start_time
 
 	# While loop instead simple if, because will allow to properly flush results under heavy operations(e.g. Thread sanitizer)
 	while current_run_time > time_to_print_next_time:
@@ -62,5 +51,3 @@ func _process(delta: float) -> void:
 		get_tree().quit()
 
 
-func _exit_tree() -> void:
-	time_object.free()
