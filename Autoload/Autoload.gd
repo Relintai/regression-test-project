@@ -32,11 +32,11 @@ func _init():
 	if ClassDB.class_exists("_Time"):
 		time_object = ClassDB.instance("_Time")
 	elif ClassDB.class_exists("Time"):
-		time_object = ClassDB.instance("Time")
+		time_object = Time#ClassDB.instance("Time")
 	else:
 		time_object = ClassDB.instance("_OS")
 
-	start_time = time_object.get_ticks_msec()
+	start_time = Time.get_ticks_msec()
 
 	# In case when user doesn't provide time
 	time_for_each_step = time_to_show / (alone_steps.size())
